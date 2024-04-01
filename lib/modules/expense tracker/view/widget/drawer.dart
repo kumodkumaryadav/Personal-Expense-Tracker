@@ -24,19 +24,20 @@ class MyDrawer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage('assets/user_photo.png'),
+                  backgroundImage: NetworkImage(
+                      "https://media.licdn.com/dms/image/D4D03AQHKwnVnD-dZGA/profile-displayphoto-shrink_200_200/0/1680599426255?e=2147483647&v=beta&t=K6K7NwdFxwueKEkXjFZUz_NoTEdXJP0Rj_8FHAaSzCs"),
                   radius: 30,
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'User Name',
+                  'Kumod Yadav',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                   ),
                 ),
                 Text(
-                  'user@example.com',
+                  'kumod353@gmail.com',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,

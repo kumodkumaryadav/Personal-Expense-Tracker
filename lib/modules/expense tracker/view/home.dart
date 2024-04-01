@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
-import 'package:get/utils.dart';
 import 'package:intl/intl.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/controller/input_controller.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/resources/routes/route_name.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/utils/text_style.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/view/widget/drawer.dart';
-
-import '../model/filter_model.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -27,66 +24,22 @@ class HomePage extends StatelessWidget {
         body: Obx(() => inputController.inputs.isEmpty
             ? Center(
                 child: Text("no_expense_hint".tr),
+
+                //in this way multi language can be done to intire app
+                //I am not going to do it for intire app. It is as per business need
               )
             : Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+                      IconButton(
+                          onPressed: () {}, icon: const Icon(Icons.search)),
                       IconButton(
                           onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: const Text('Select Filters'),
-                                  content: SingleChildScrollView(
-                                    child: Column(
-                                      children: List.generate(
-                                        inputController.filters.length,
-                                        (index) => CheckboxListTile(
-                                          title: Text(inputController
-                                              .filters[index].title),
-                                          value: inputController
-                                              .filters[index].isSelected,
-                                          onChanged: (value) {
-                                            // inputController.toggleFilter(index, value ?? false);
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  //   return Obx(() =>
-
-                                  actions: <Widget>[
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        // Get selected filters
-                                        List<FilterItem> selectedFilters =
-                                            inputController.filters
-                                                .where((filter) =>
-                                                    filter.isSelected)
-                                                .toList();
-                                        // Do something with selected filters
-                                        print(
-                                            'Selected Filters: $selectedFilters');
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('Apply Filters'),
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('Cancel'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
+                            Get.toNamed("/filter");
                           },
-                          icon: Icon(Icons.sort_sharp)),
+                          icon: const Icon(Icons.sort_sharp)),
                     ],
                   ),
                   Expanded(
@@ -100,7 +53,7 @@ class HomePage extends StatelessWidget {
                                   horizontal: 16, vertical: 10),
                               child: Slidable(
                                 endActionPane: ActionPane(
-                                  motion: ScrollMotion(),
+                                  motion: const ScrollMotion(),
                                   children: [
                                     SlidableAction(
                                       // Delete action
@@ -113,9 +66,14 @@ class HomePage extends StatelessWidget {
                                       label: 'Delete',
                                     ),
                                     SlidableAction(
-                                      // Update action (replace with your update logic)
+                                      // Update action
                                       onPressed: (context) => {
-                                        // inputController.updateInput(id, updatedInput)
+                                        Get.toNamed(
+                                            RouteName.updateExpenseScreen,
+                                            arguments: {
+                                              'index': index,
+                                              'stringId': eachData.id
+                                            })
                                       },
                                       backgroundColor: Colors.blue,
                                       foregroundColor: Colors.white,
@@ -147,13 +105,10 @@ class HomePage extends StatelessWidget {
                                       ),
                                       const SizedBox(width: 20),
                                       Text(
-                                        "Date: ${DateFormat('yyyy-MM-dd').format(inputController.date.value)}",
+                                        "Date: ${DateFormat('yyyy-MM-dd').format(eachData.dateTime)}",
                                       )
                                     ],
                                   ),
-                                  //eachData.dateTime
-
-                                  //${DateFormat('yyyy-MM-dd').format(inputController.date.value)}
                                 ),
                               ),
                             );

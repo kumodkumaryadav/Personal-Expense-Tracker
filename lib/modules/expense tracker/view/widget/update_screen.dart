@@ -1,31 +1,40 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:personal_expense_tracker/modules/expense%20tracker/model/input_model.dart';
-
-import '../controller/input_controller.dart';
 import 'package:intl/intl.dart';
 
-class InputScreen extends StatelessWidget {
-  final inputController = Get.put(InputController());
+import '../../controller/input_controller.dart';
+import '../../model/input_model.dart';
+
+class UpdateScreen extends StatelessWidget {
+  final InputController inputController = Get.put(InputController());
   final TextEditingController titleTextController = TextEditingController();
   final TextEditingController amountTextController = TextEditingController();
   final TextEditingController descTextController = TextEditingController();
 
-  InputScreen({super.key});
-  void dispose() {
-    titleTextController.dispose();
-    amountTextController.dispose();
-
-    descTextController.dispose();
-  }
+  UpdateScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    Map<String, dynamic> arguments = Get.arguments;
+    int index = arguments['index'];
+    var data = inputController.inputs[index];
+    String stringId = arguments['stringId'];
+    inputController.updateDate.value = data.dateTime.toIso8601String();
+    // DateTime dateData = data.dateTime;
+
+    titleTextController.text = data.title;
+    amountTextController.text = data.amount.toString();
+    descTextController.text = data.description;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
         centerTitle: true,
-        title: const Text("ADD EXPENSE"),
+        title: const Text("UPDATE EXPENSE"),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -51,17 +60,20 @@ class InputScreen extends StatelessWidget {
             Obx(
               () => TextButton(
                 onPressed: () => showDatePicker(
-                  context: context,
-                  initialDate: inputController.date.value,
-                  firstDate: DateTime(2023),
-                  lastDate: DateTime.now(),
-                ).then((pickedDate) {
+                        context: context,
+                        initialDate: inputController.date.value,
+                        firstDate: DateTime(2023),
+                        lastDate: DateTime.now(),
+                        currentDate:
+                            DateTime.parse(inputController.updateDate.value))
+                    .then((pickedDate) {
                   if (pickedDate != null) {
-                    inputController.date.value = pickedDate;
+                    inputController.updateDate.value =
+                        pickedDate.toIso8601String();
                   }
                 }),
                 child: Text(
-                  'Expense Date: ${DateFormat('yyyy-MM-dd').format(inputController.date.value)}',
+                  'Expense Date: ${DateFormat('yyyy-MM-dd').format(DateTime.parse(inputController.updateDate.toString()))}',
                 ),
               ),
             ),
@@ -76,7 +88,8 @@ class InputScreen extends StatelessWidget {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                var id = inputController.uuid.v1();
+                // var id = data.id;
+
                 var title = titleTextController.text;
                 var dateTime = inputController.date.value;
                 double amount;
@@ -84,23 +97,23 @@ class InputScreen extends StatelessWidget {
                   amount = double.parse(amountTextController.text);
                 } else {
                   debugPrint('Amount field is empty');
-
                   amount = -1.0;
                 }
 
                 var description = descTextController.text;
-                final input = InputModel(
-                    id: id,
-                    title: title,
+                InputModel updatedInput = InputModel(
+                    id: data.id,
+                    title: titleTextController.text,
                     amount: amount,
-                    dateTime: dateTime,
+                    dateTime: DateTime.parse(inputController.updateDate.value),
                     description: description);
-                inputController.addInput(input);
+                inputController.updateInput(index, data.id, updatedInput);
+                // inputController.updateInput(data.id, updatedInput);
               },
               child: Obx(
                 () => inputController.isLoading.value
                     ? const Center(child: CircularProgressIndicator())
-                    : const Text('Submit'),
+                    : const Text('Update'),
               ),
             )
           ],

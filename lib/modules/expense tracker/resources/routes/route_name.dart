@@ -3,6 +3,7 @@ class RouteName {
   static const String homeScreen = "/home";
   static const String loginScreen = "/login";
   static const String addExpenseScreen = "/addExpense";
-  static const String notification = "/notification";
+  static const String updateExpenseScreen = "/updateExpense";
+  static const String filterScreen = "/filter";
   static const String summary = "/notification";
 }
