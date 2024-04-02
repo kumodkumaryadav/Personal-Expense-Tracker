@@ -23,9 +23,9 @@ class HomePage extends StatelessWidget {
           actions: [
             IconButton(
                 onPressed: () {
-                  Get.toNamed(RouteName.notification);
+                  Get.offAllNamed(RouteName.notification);
                 },
-                icon: Icon(Icons.notifications))
+                icon:const Icon(Icons.notifications))
           ],
         ),
         body: Obx(() => inputController.inputs.isEmpty

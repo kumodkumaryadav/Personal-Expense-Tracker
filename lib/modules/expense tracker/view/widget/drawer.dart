@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:personal_expense_tracker/modules/expense%20tracker/resources/routes/route_name.dart';
 
 import '../../controller/language_controller.dart';
 

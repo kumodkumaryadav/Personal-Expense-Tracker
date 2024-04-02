@@ -7,6 +7,8 @@ import 'package:personal_expense_tracker/modules/expense%20tracker/services/noti
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationScreen extends StatelessWidget {
+  const NotificationScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +47,7 @@ class NotificationScreen extends StatelessWidget {
       tz.TZDateTime tzScheduledDateTime) async {
     await Permission.scheduleExactAlarm.request();
     final status = await Permission.scheduleExactAlarm.status;
-    print("status $status");
+    debugPrint("status $status");
 
     if (status.isGranted) {
       // Proceed with scheduling notification using zonedSchedule
@@ -102,9 +104,9 @@ class _NotificationPageState extends State<NotificationPage> {
 
 //  to listen to any notification clicked or not
   listenToNotifications() async {
-    await LocalNotifications
-        .init(); //must initialize before listening any stream
-    print("Listening to notification");
+    // await LocalNotifications
+    //     .init(); //must initialize before listening any stream
+    debugPrint("Listening to notification");
     LocalNotifications.onClickNotification.stream.listen((event) {
       Get.offAllNamed(RouteName.addExpenseScreen);
 
@@ -116,35 +118,35 @@ class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Flutter Local Notifications")),
-      body: Container(
+      appBar: AppBar(title: const Text("Flutter Local Notifications")),
+      body: SizedBox(
         height: double.infinity,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton.icon(
-                icon: Icon(Icons.notifications_outlined),
+                icon: const Icon(Icons.notifications_outlined),
                 onPressed: () {
                   LocalNotifications.showSimpleNotification(
                       title: "Simple Notification",
                       body: "This is a simple notification",
                       payload: "This is simple data");
                 },
-                label: Text("Simple Notification"),
+                label: const Text("Simple Notification"),
               ),
               ElevatedButton.icon(
-                icon: Icon(Icons.timer_outlined),
+                icon: const Icon(Icons.timer_outlined),
                 onPressed: () {
                   LocalNotifications.showPeriodicNotifications(
                       title: "Periodic Notification",
                       body: "This is a Periodic Notification",
                       payload: "This is periodic data");
                 },
-                label: Text("Periodic Notifications"),
+                label: const Text("Periodic Notifications"),
               ),
               ElevatedButton.icon(
-                icon: Icon(Icons.timer_outlined),
+                icon: const Icon(Icons.timer_outlined),
                 onPressed: () {
                   LocalNotifications.showScheduleNotification(
                       title: "Did you add today's expenses",
@@ -152,39 +154,25 @@ class _NotificationPageState extends State<NotificationPage> {
                       payload: "This is schedule data",
                       dateTime: DateTime.now());
                 },
-                label: Text("Schedule Notifications"),
+                label: const Text("Schedule Notifications"),
               ),
               // to close periodic notifications
               ElevatedButton.icon(
-                  icon: Icon(Icons.delete_outline),
+                  icon: const Icon(Icons.delete_outline),
                   onPressed: () {
                     LocalNotifications.cancel(1);
                   },
-                  label: Text("Close Periodic Notifcations")),
+                  label: const Text("Close Periodic Notifcations")),
               ElevatedButton.icon(
-                  icon: Icon(Icons.delete_forever_outlined),
+                  icon: const Icon(Icons.delete_forever_outlined),
                   onPressed: () {
                     LocalNotifications.cancelAll();
                   },
-                  label: Text("Cancel All Notifcations"))
+                  label: const Text("Cancel All Notifcations"))
             ],
           ),
         ),
       ),
-    );
-  }
-}
-
-class AnotherPage extends StatelessWidget {
-  const AnotherPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final data = ModalRoute.of(context)!.settings.arguments;
-
-    return Scaffold(
-      appBar: AppBar(title: Text("Another Page")),
-      body: Center(child: Text(data.toString())),
     );
   }
 }
