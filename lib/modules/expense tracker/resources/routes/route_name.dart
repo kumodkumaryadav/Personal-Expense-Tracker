@@ -5,5 +5,5 @@ class RouteName {
   static const String addExpenseScreen = "/addExpense";
   static const String updateExpenseScreen = "/updateExpense";
   static const String filterScreen = "/filter";
-  static const String summary = "/notification";
+  static const String notification = "/notification";
 }

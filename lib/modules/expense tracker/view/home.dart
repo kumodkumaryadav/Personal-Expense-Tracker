@@ -20,6 +20,13 @@ class HomePage extends StatelessWidget {
           backgroundColor: Colors.blue,
           centerTitle: true,
           title: Text("app_title".tr),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Get.toNamed(RouteName.notification);
+                },
+                icon: Icon(Icons.notifications))
+          ],
         ),
         body: Obx(() => inputController.inputs.isEmpty
             ? Center(

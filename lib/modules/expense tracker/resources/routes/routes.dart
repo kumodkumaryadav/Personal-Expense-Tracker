@@ -6,6 +6,8 @@ import 'package:personal_expense_tracker/modules/expense%20tracker/view/home.dar
 import 'package:personal_expense_tracker/modules/expense%20tracker/view/widget/filter_screen.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/view/widget/update_screen.dart';
 
+import '../../view/widget/notification_screen.dart';
+
 class AppRoutes {
   static appRoutes() => [
         GetPage(
@@ -29,6 +31,12 @@ class AppRoutes {
         GetPage(
           name: RouteName.filterScreen,
           page: () => FilterScreen(),
+          transitionDuration: const Duration(milliseconds: 250),
+          transition: Transition.leftToRightWithFade,
+        ),
+        GetPage(
+          name: RouteName.notification,
+          page: () => NotificationPage(),
           transitionDuration: const Duration(milliseconds: 250),
           transition: Transition.leftToRightWithFade,
         ),
