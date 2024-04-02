@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/model/input_model.dart';
+import 'package:personal_expense_tracker/modules/expense%20tracker/resources/routes/route_name.dart';
 
 import '../controller/input_controller.dart';
 import 'package:intl/intl.dart';
@@ -23,6 +24,11 @@ class InputScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: const Icon(Icons.arrow_back)),
         backgroundColor: Colors.blue,
         centerTitle: true,
         title: const Text("ADD EXPENSE"),

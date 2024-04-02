@@ -108,7 +108,7 @@ class _NotificationPageState extends State<NotificationPage> {
     //     .init(); //must initialize before listening any stream
     debugPrint("Listening to notification");
     LocalNotifications.onClickNotification.stream.listen((event) {
-      Get.offAllNamed(RouteName.addExpenseScreen);
+      Get.toNamed(RouteName.addExpenseScreen);
 
       // print(event);
       // Navigator.pushNamed(context, '/another', arguments: event);

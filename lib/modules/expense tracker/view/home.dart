@@ -17,10 +17,12 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         drawer: MyDrawer(),
         appBar: AppBar(
+          
           backgroundColor: Colors.blue,
           centerTitle: true,
           title: Text("app_title".tr),
           actions: [
+            
             IconButton(
                 onPressed: () {
                   Get.offAllNamed(RouteName.notification);

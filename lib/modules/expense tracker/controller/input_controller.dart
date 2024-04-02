@@ -87,7 +87,7 @@ class InputController extends GetxController {
       inputs.add(input);
       saveData(); // Save data after adding a new input
       Future.delayed(const Duration(seconds: 2), () {
-        Get.offAllNamed(RouteName.homeScreen);
+        Get.toNamed(RouteName.homeScreen, preventDuplicates: false);
         isLoading.value = false;
         Get.snackbar('Submitted',
             'Amount: ${input.amount}, Date: ${DateFormat('yyyy-MM-dd').format(input.dateTime)}, Description: ${input.description}',
