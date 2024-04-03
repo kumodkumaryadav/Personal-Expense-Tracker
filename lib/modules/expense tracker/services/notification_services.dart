@@ -123,3 +123,7 @@ class LocalNotifications {
     await _flutterLocalNotificationsPlugin.cancelAll();
   }
 }
+
+
+
+

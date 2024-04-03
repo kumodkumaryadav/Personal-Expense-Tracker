@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/controller/input_controller.dart';
+import 'package:personal_expense_tracker/modules/expense%20tracker/resources/colors/app_color.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/resources/routes/route_name.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/utils/text_style.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/view/widget/drawer.dart';
@@ -17,17 +18,15 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         drawer: MyDrawer(),
         appBar: AppBar(
-          
           backgroundColor: Colors.blue,
           centerTitle: true,
           title: Text("app_title".tr),
           actions: [
-            
             IconButton(
                 onPressed: () {
                   Get.offAllNamed(RouteName.notification);
                 },
-                icon:const Icon(Icons.notifications))
+                icon: const Icon(Icons.notifications))
           ],
         ),
         body: Obx(() => inputController.inputs.isEmpty
@@ -46,7 +45,8 @@ class HomePage extends StatelessWidget {
                           onPressed: () {}, icon: const Icon(Icons.search)),
                       IconButton(
                           onPressed: () {
-                            Get.toNamed("/filter");
+                            Get.toNamed(RouteName.filterScreen,
+                                preventDuplicates: false);
                           },
                           icon: const Icon(Icons.sort_sharp)),
                     ],
@@ -91,32 +91,37 @@ class HomePage extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                child: ListTile(
-                                  title: Row(
-                                    children: [
-                                      Text(
-                                        eachData.title,
-                                        style: TextStyleHelper.t16b700(),
-                                      ),
-                                      const Spacer(),
-                                      Text(
-                                        "Amount: \$${eachData.amount.toString()}",
-                                        style: TextStyleHelper.t16b700(),
-                                      )
-                                    ],
-                                  ),
-                                  subtitle: Row(
-                                    children: [
-                                      Flexible(
-                                        child: Text(
-                                          eachData.description,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.black12),
+                                  child: ListTile(
+                                    title: Row(
+                                      children: [
+                                        Text(
+                                          eachData.title,
+                                          style: TextStyleHelper.t16b700(),
                                         ),
-                                      ),
-                                      const SizedBox(width: 20),
-                                      Text(
-                                        "Date: ${DateFormat('yyyy-MM-dd').format(eachData.dateTime)}",
-                                      )
-                                    ],
+                                        const Spacer(),
+                                        Text(
+                                          "Amount: \$${eachData.amount.toString()}",
+                                          style: TextStyleHelper.t16b700(),
+                                        )
+                                      ],
+                                    ),
+                                    subtitle: Row(
+                                      children: [
+                                        Flexible(
+                                          child: Text(
+                                            eachData.description,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 20),
+                                        Text(
+                                          "Date: ${DateFormat('yyyy-MM-dd').format(eachData.dateTime)}",
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),

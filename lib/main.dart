@@ -23,13 +23,9 @@ void main() async {
   var initialNotification =
       await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
   if (initialNotification?.didNotificationLaunchApp == true) {
-  
     Future.delayed(const Duration(seconds: 1), () {
-      Get.offAllNamed(RouteName.addExpenseScreen);
-      // print(event);
-      // navigatorKey.currentState!.pushNamed('/another',
-      //     arguments: initialNotification?.notificationResponse?.payload);
-    });
+      Get.toNamed(RouteName.addExpenseScreen);
+       });
   }
 
   runApp(const MyApp());
