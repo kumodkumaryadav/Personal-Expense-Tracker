@@ -3,6 +3,9 @@
 A new Flutter project.
 
 ## Getting Started
+Login credentials:- 
+userId=eve.holt@reqres.in
+password=cityslicka
 
 This project is a starting point for a Flutter application.
 

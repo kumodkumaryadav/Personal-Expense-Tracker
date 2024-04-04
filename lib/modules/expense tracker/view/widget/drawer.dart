@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:personal_expense_tracker/modules/auth%20module/controllers/login_controller.dart';
+import 'package:personal_expense_tracker/respurces/app_constant.dart';
 
 import '../../controller/language_controller.dart';
 
 class MyDrawer extends StatelessWidget {
   final LocalizationController localizationController =
       Get.put(LocalizationController());
+  final loginController = Get.put(LoginController());
 
   MyDrawer({super.key});
 
@@ -49,6 +52,7 @@ class MyDrawer extends StatelessWidget {
             leading: const Icon(Icons.exit_to_app),
             title: const Text('Logout'),
             onTap: () {
+              loginController.logOut();
               // Implement logout functionality
             },
           ),
@@ -83,7 +87,7 @@ class MyDrawer extends StatelessWidget {
           const ListTile(
             leading: Icon(Icons.info),
             title: Text('App Version'),
-            subtitle: Text('1.0.0'),
+            subtitle: Text(AppConstant.appVersion),
           ),
         ],
       ),

@@ -1,13 +1,15 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:personal_expense_tracker/modules/auth%20module/models/token_model.dart';
+import 'package:personal_expense_tracker/modules/auth%20module/services/auth_service.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/resources/localizations/language.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/resources/routes/route_name.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/resources/routes/routes.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/services/notification_services.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/view/home.dart';
-
 import 'package:timezone/data/latest.dart' as tz;
 
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -17,6 +19,8 @@ FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await LocalNotifications.init();
+  final AuthServices authServices = AuthServices();
+  Tokens tokens = await authServices.getTokenFromStoarge();
   // Configure initialization settings
   await GetStorage.init();
   tz.initializeTimeZones();
@@ -25,18 +29,25 @@ void main() async {
   if (initialNotification?.didNotificationLaunchApp == true) {
     Future.delayed(const Duration(seconds: 1), () {
       Get.toNamed(RouteName.addExpenseScreen);
-       });
+    });
   }
 
-  runApp(const MyApp());
+  runApp(MyApp(
+    tokens: tokens,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Tokens tokens;
+  MyApp({
+    Key? key,
+    required this.tokens,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      initialRoute: tokens.token.isNotEmpty? RouteName.homeScreen : RouteName.loginScreen,
       debugShowCheckedModeBanner: false,
       getPages: AppRoutes.appRoutes(),
       translations: Languages(),

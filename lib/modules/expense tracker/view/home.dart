@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/controller/input_controller.dart';
+import 'package:personal_expense_tracker/modules/expense%20tracker/controller/notification_controller.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/resources/colors/app_color.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/resources/routes/route_name.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/utils/text_style.dart';
@@ -11,6 +12,8 @@ import 'package:personal_expense_tracker/modules/expense%20tracker/view/widget/d
 class HomePage extends StatelessWidget {
   HomePage({super.key});
   final inputController = Get.put(InputController());
+  final notificationController = Get.put(NotificationController());
+
 
   @override
   Widget build(BuildContext context) {

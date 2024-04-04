@@ -62,6 +62,7 @@ class LocalNotifications {
   }
 
   // to show periodic notification at regular interval
+  
   static Future showPeriodicNotifications({
     required String title,
     required String body,
@@ -123,7 +124,3 @@ class LocalNotifications {
     await _flutterLocalNotificationsPlugin.cancelAll();
   }
 }
-
-
-
-

@@ -29,6 +29,8 @@ class LocalizationController extends GetxController {
       locale.value = "hindi_in";
     }
 
-    Get.updateLocale(Locale(locale.value));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.updateLocale(Locale(locale.value));
+    });
   }
 }

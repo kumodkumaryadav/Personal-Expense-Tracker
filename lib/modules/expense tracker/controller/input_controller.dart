@@ -38,6 +38,10 @@ class InputController extends GetxController {
     box.write('inputs', dataToStore);
   }
 
+  deleteDataFromStorage() async {
+    await box.remove("inputs");
+  }
+
   // Method to load data from storage
   void loadData() {
     dynamic storedData = box.read('inputs') ?? "";

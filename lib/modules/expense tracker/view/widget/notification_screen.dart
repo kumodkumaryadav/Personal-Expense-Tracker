@@ -1,38 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:personal_expense_tracker/modules/expense%20tracker/controller/notification_controller.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/resources/colors/app_color.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/resources/routes/route_name.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/services/notification_services.dart';
-import 'package:timezone/timezone.dart' as tz;
 
-class NotificationPage extends StatefulWidget {
-  const NotificationPage({super.key});
+import '../../controller/input_controller.dart';
 
-  @override
-  State<NotificationPage> createState() => _NotificationPageState();
-}
+class NotificationPage extends StatelessWidget {
+  NotificationPage({super.key});
 
-class _NotificationPageState extends State<NotificationPage> {
-  @override
-  void initState() {
-    listenToNotifications();
-    super.initState();
-  }
+  final inputController = Get.put(InputController());
+  final notificationController = Get.put(NotificationController());
 
 //  to listen to any notification clicked or not
-  listenToNotifications() async {
-    // await LocalNotifications
-    //     .init(); //must initialize before listening any stream
-    debugPrint("Listening to notification");
-    LocalNotifications.onClickNotification.stream.listen((event) {
-      Get.toNamed(RouteName.addExpenseScreen);
-
-      // print(event);
-      // Navigator.pushNamed(context, '/another', arguments: event);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
