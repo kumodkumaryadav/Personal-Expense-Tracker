@@ -34,4 +34,13 @@ class InputModel {
       description: json['description'],
     );
   }
+
+  factory InputModel.emptry() {
+    return InputModel(
+        id: "",
+        title: "",
+        amount: -1,
+        dateTime: DateTime.now(),
+        description: "");
+  }
 }

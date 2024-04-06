@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:personal_expense_tracker/modules/auth%20module/controllers/login_controller.dart';
+import 'package:personal_expense_tracker/modules/auth%20module/services/auth_service.dart';
+import 'package:personal_expense_tracker/modules/expense%20tracker/controller/input_controller.dart';
+import 'package:personal_expense_tracker/modules/expense%20tracker/services/local%20storage/experse_storage.dart';
 import 'package:personal_expense_tracker/resources/app_constant.dart';
 
 import '../../controller/language_controller.dart';
@@ -67,6 +70,12 @@ class MyDrawer extends StatelessWidget {
             leading: const Icon(Icons.color_lens),
             title: const Text('Change Theme'),
             onTap: () {
+              // final StorageServices authServices1 = StorageServices();
+              // final StorageServices authServices2 = StorageServices();
+              final InputController inputController1 = (InputController());
+              final InputController inputController2 = (InputController());
+              print(
+                  "Instance are same ${identical(inputController1, inputController2)}");
               // Implement theme change functionality
             },
           ),

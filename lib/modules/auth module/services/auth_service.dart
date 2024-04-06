@@ -3,9 +3,18 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:personal_expense_tracker/modules/auth%20module/models/token_model.dart';
 
-//This dependency injection way its improved in Clean Code branch
+//This is singleton pattern for create only one instance of this class in entire app
 class AuthServices {
   final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+
+  // AuthServices._(); //private const
+  static final AuthServices instance = AuthServices();
+
+  // factory AuthServices() {
+  //   return _instance;
+  // }
+  // static  get instance=> _instance;
+
   Future<void> storeToken(Tokens tokens) async {
     // Convert token map to JSON string since secure storage only accept string type as value. no needed this if it accept dynamic
     String tokenJson = json.encode(tokens.toJson());

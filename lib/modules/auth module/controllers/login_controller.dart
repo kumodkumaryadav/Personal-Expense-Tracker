@@ -16,7 +16,9 @@ class LoginController extends GetxController {
   final ApiService apiService = ApiService();
   final AuthServices authServices = AuthServices();
   final inputController = Get.put(InputController());
-  final StorageServices storageServices = StorageServices();
+  // final StorageServices storageServices = StorageServices();
+  final StorageServices storageServices =
+      StorageServices(GetStorageRepository(), DataSerializer());
   RxBool loading = false.obs;
   setLoading(bool load) {
     loading.value = load;

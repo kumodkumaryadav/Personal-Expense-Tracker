@@ -19,10 +19,13 @@ class InputController extends GetxController {
   RxString updateDate = "".obs;
   RxString title = ''.obs;
   RxString description = ''.obs;
+  InputModel etryFromInput = InputModel.emptry();//this can be used instead of all the above variables I am leaving it for a time being
 
   RxList<InputModel> inputs = <InputModel>[].obs;
   RxList<InputModel> tempInput = <InputModel>[].obs;
-  final StorageServices storageServices = StorageServices();
+  // final StorageServices storageServices = 
+  final StorageServices storageServices=Get.put(StorageServices(GetStorageRepository(), DataSerializer()));
+
 
   @override
   void onInit() {
@@ -44,7 +47,7 @@ class InputController extends GetxController {
 
   // Method to load data from storage
   void loadData() {
-    List<InputModel> localDataList = storageServices.getExpenseFromStorage();
+    List<InputModel> localDataList = storageServices.retrieveInputDataFromStorage();
     inputs.assignAll(localDataList);
 
     // dynamic storedData = box.read('inputs') ?? "";
@@ -92,7 +95,7 @@ class InputController extends GetxController {
   void addInput(InputModel input) {
     if (isInputModelNotEmpty(input)) {
       EasyLoading.show(
-          status: "Please wait we are saving you entry",
+          status: "Please wait we are saving your entry",
           maskType: EasyLoadingMaskType.black);
 
       inputs.add(input);
