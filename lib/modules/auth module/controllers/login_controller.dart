@@ -6,8 +6,8 @@ import 'package:personal_expense_tracker/modules/auth%20module/services/auth_ser
 import 'package:personal_expense_tracker/modules/expense%20tracker/controller/input_controller.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/resources/colors/app_color.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/resources/routes/route_name.dart';
-import 'package:personal_expense_tracker/respurces/api_helper.dart';
-import 'package:personal_expense_tracker/respurces/dio_client.dart';
+import 'package:personal_expense_tracker/resources/api_helper.dart';
+import 'package:personal_expense_tracker/resources/dio_client.dart';
 
 class LoginController extends GetxController {
   Rx<InputUserModel> inputUserModel = InputUserModel.empty().obs;
@@ -25,6 +25,13 @@ class LoginController extends GetxController {
     Get.offAllNamed(RouteName.loginScreen);
     Get.snackbar("Log out!", "Successfully logged out and all entry deleted",
         backgroundColor: AppColor.redColor, colorText: AppColor.whiteColor);
+  }
+
+  checkAuthentication() async {
+    Tokens token = await authServices.getTokenFromStoarge();
+    if (token.token.isEmpty) {
+      Get.offAllNamed(RouteName.loginScreen);
+    }
   }
 
   login() async {

@@ -28,6 +28,7 @@ void main() async {
       await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
   if (initialNotification?.didNotificationLaunchApp == true) {
     Future.delayed(const Duration(seconds: 1), () {
+      print("back button response");
       Get.toNamed(RouteName.addExpenseScreen);
     });
   }
@@ -47,7 +48,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: tokens.token.isNotEmpty? RouteName.homeScreen : RouteName.loginScreen,
+      initialRoute: tokens.token.isNotEmpty
+          ? RouteName.homeScreen
+          : RouteName.loginScreen,
       debugShowCheckedModeBanner: false,
       getPages: AppRoutes.appRoutes(),
       translations: Languages(),
@@ -57,7 +60,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomePage(),
+      // home: HomePage(),//it was causing error
     );
   }
 }

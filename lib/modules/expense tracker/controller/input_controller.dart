@@ -66,7 +66,8 @@ class InputController extends GetxController {
   final uuid = const Uuid();
 //filter expense
 
-  final filters = ['Title A-Z', 'Amount < 500', 'Amount > 200'].obs;
+  final filters =
+      ['Title A-Z', 'Amount < 500', 'Amount > 200', 'Sort by date'].obs;
 
   final selectedFilters = <String>{}.obs;
 
@@ -168,6 +169,9 @@ class InputController extends GetxController {
         }
         if (element.contains("> 200")) {
           inputs.removeWhere((input) => input.amount <= 200);
+        }
+        if (element.contains("Sort by date")) {
+          inputs.sort((a, b) => a.dateTime.compareTo(b.dateTime));
         }
       }
       Get.back();

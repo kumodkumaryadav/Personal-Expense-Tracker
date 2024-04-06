@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:personal_expense_tracker/respurces/api_helper.dart';
+import 'package:personal_expense_tracker/resources/api_helper.dart';
 
 class ApiService {
   final Dio dio = Dio(BaseOptions(baseUrl: ApiHepler.baseUrl));

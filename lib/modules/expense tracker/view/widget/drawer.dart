@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:personal_expense_tracker/modules/auth%20module/controllers/login_controller.dart';
-import 'package:personal_expense_tracker/respurces/app_constant.dart';
+import 'package:personal_expense_tracker/resources/app_constant.dart';
 
 import '../../controller/language_controller.dart';
 
@@ -27,7 +27,8 @@ class MyDrawer extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundImage: NetworkImage(
-                      "https://media.licdn.com/dms/image/D4D03AQHKwnVnD-dZGA/profile-displayphoto-shrink_200_200/0/1680599426255?e=2147483647&v=beta&t=K6K7NwdFxwueKEkXjFZUz_NoTEdXJP0Rj_8FHAaSzCs"),
+                    "https://media.licdn.com/dms/image/D4D03AQHKwnVnD-dZGA/profile-displayphoto-shrink_200_200/0/1680599426255?e=2147483647&v=beta&t=K6K7NwdFxwueKEkXjFZUz_NoTEdXJP0Rj_8FHAaSzCs",
+                  ),
                   radius: 30,
                 ),
                 SizedBox(height: 10),
@@ -49,13 +50,19 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.exit_to_app),
-            title: const Text('Logout'),
-            onTap: () {
-              loginController.logOut();
-              // Implement logout functionality
-            },
-          ),
+              leading: const Icon(Icons.exit_to_app),
+              title: const Text('Logout'),
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return LogoutDialog(onLogoutPressed: () {
+                      loginController.logOut();
+                    });
+                    // Implement logout functionality
+                  },
+                );
+              }),
           ListTile(
             leading: const Icon(Icons.color_lens),
             title: const Text('Change Theme'),
@@ -120,6 +127,92 @@ class LanguageDropdown extends StatelessWidget {
         }
       },
       hint: const Text('Select Language'), // Placeholder text
+    );
+  }
+}
+
+class LogoutDialog extends StatelessWidget {
+  final Function onLogoutPressed;
+
+  LogoutDialog({required this.onLogoutPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      child: contentBox(context),
+    );
+  }
+
+  contentBox(context) {
+    return Stack(
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black,
+                offset: Offset(0, 10),
+                blurRadius: 10,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text(
+                'Logout',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 15),
+              Text(
+                'Are you sure you want to logout? Saved data will be deleted.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+              SizedBox(height: 22),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      onLogoutPressed();
+                      Get.back(); // Close the dialog
+                    },
+                    child: Text(
+                      'Logout',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  TextButton(
+                    onPressed: () {
+                      Get.back(); // Close the dialog
+                    },
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

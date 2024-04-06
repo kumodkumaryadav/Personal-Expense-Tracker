@@ -15,14 +15,16 @@ class UpdateScreen extends StatelessWidget {
   UpdateScreen({
     Key? key,
   }) : super(key: key);
-
+  Map<String, dynamic>? arguments;
   @override
   Widget build(BuildContext context) {
-
-    Map<String, dynamic> arguments = Get.arguments;
-    int index = arguments['index'];
+    if (Get.arguments != null) {
+      arguments = Get.arguments;
+    }
+    int index = arguments!['index'];
     var data = inputController.inputs[index];
-    String stringId = arguments['stringId'];
+    String stringId = arguments!['stringId'];
+
     inputController.updateDate.value = data.dateTime.toIso8601String();
     // DateTime dateData = data.dateTime;
 

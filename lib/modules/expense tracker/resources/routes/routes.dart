@@ -11,9 +11,9 @@ import '../../view/widget/notification_screen.dart';
 
 class AppRoutes {
   static appRoutes() => [
-    GetPage(
+        GetPage(
           name: RouteName.loginScreen,
-          page: () =>  LoginScreen(),
+          page: () => LoginScreen(),
           transitionDuration: const Duration(milliseconds: 250),
           transition: Transition.leftToRightWithFade,
         ),

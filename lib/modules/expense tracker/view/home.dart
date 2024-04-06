@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:personal_expense_tracker/modules/auth%20module/controllers/login_controller.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/controller/input_controller.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/controller/notification_controller.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/resources/colors/app_color.dart';
@@ -12,24 +13,36 @@ import 'package:personal_expense_tracker/modules/expense%20tracker/view/widget/d
 class HomePage extends StatelessWidget {
   HomePage({super.key});
   final inputController = Get.put(InputController());
-  final notificationController = Get.put(NotificationController());
-
 
   @override
   Widget build(BuildContext context) {
+    print("home screeeeeen");
     return SafeArea(
       child: Scaffold(
         drawer: MyDrawer(),
         appBar: AppBar(
           backgroundColor: Colors.blue,
           centerTitle: true,
-          title: Text("app_title".tr),
+          title: Text(
+            "app_title".tr,
+            style: const TextStyle(color: AppColor.whiteColor),
+          ),
           actions: [
             IconButton(
                 onPressed: () {
-                  Get.offAllNamed(RouteName.notification);
+                  Get.toNamed(RouteName.filterScreen);
                 },
-                icon: const Icon(Icons.notifications))
+                icon: const Icon(
+                  Icons.filter_alt,
+                  color: AppColor.whiteColor,
+                )),
+            IconButton(
+              onPressed: () {
+                Get.offAllNamed(RouteName.notification);
+              },
+              icon: const Icon(Icons.notifications),
+              color: AppColor.whiteColor,
+            )
           ],
         ),
         body: Obx(() => inputController.inputs.isEmpty
@@ -41,19 +54,6 @@ class HomePage extends StatelessWidget {
               )
             : Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.search)),
-                      IconButton(
-                          onPressed: () {
-                            Get.toNamed(RouteName.filterScreen,
-                                preventDuplicates: false);
-                          },
-                          icon: const Icon(Icons.sort_sharp)),
-                    ],
-                  ),
                   Expanded(
                       child: ListView.builder(
                           itemCount: inputController.inputs.length,

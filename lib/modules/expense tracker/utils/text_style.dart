@@ -14,4 +14,6 @@ class TextStyleHelper {
       const TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
   static TextStyle t16b700() =>
       const TextStyle(fontSize: 16, fontWeight: FontWeight.w700);
+  static TextStyle t25b700() =>
+      const TextStyle(fontSize: 25, fontWeight: FontWeight.w700);
 }
