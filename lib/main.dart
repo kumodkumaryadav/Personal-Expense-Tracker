@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/route_manager.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:personal_expense_tracker/modules/auth%20module/models/token_model.dart';
 import 'package:personal_expense_tracker/modules/auth%20module/services/auth_service.dart';
@@ -59,7 +60,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        
       ),
+      builder: EasyLoading.init(),
+      
       // home: HomePage(),//it was causing error
     );
   }

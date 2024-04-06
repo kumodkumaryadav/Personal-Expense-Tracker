@@ -103,12 +103,10 @@ class InputScreen extends StatelessWidget {
                     description: description);
                 inputController.addInput(input);
               },
-              child: Obx(
-                () => inputController.isLoading.value
-                    ? const Center(child: CircularProgressIndicator())
-                    : const Text('Submit'),
+              child: 
+               Text('Submit'),
               ),
-            )
+            
           ],
         ),
       ),

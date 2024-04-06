@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/controller/input_controller.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/resources/colors/app_color.dart';
@@ -51,8 +52,8 @@ class FilterScreen extends StatelessWidget {
               },
             ),
             ElevatedButton(
-                onPressed: () {
-                  inputController.applyFilters();
+                onPressed: () async {
+                  inputController.filterAndApply();
                 },
                 child: const Text("APPLY FILTER")),
             const SizedBox(height: 100)

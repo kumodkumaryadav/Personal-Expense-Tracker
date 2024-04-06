@@ -112,12 +112,9 @@ class UpdateScreen extends StatelessWidget {
                 inputController.updateInput(index, data.id, updatedInput);
                 // inputController.updateInput(data.id, updatedInput);
               },
-              child: Obx(
-                () => inputController.isLoading.value
-                    ? const Center(child: CircularProgressIndicator())
-                    : const Text('Update'),
+              child:  const Text('Update'),
               ),
-            )
+            
           ],
         ),
       ),
