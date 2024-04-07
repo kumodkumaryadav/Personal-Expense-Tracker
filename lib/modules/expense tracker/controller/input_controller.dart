@@ -46,8 +46,8 @@ class InputController extends GetxController {
   // }
 
   // Method to load data from storage
-  void loadData() {
-    List<InputModel> localDataList = storageServices.retrieveInputDataFromStorage();
+  void loadData() async{
+    List<InputModel> localDataList = await storageServices.retrieveInputDataFromStorage();
     inputs.assignAll(localDataList);
 
     // dynamic storedData = box.read('inputs') ?? "";

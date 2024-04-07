@@ -10,7 +10,6 @@ import 'package:personal_expense_tracker/modules/expense%20tracker/resources/loc
 import 'package:personal_expense_tracker/modules/expense%20tracker/resources/routes/route_name.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/resources/routes/routes.dart';
 import 'package:personal_expense_tracker/modules/expense%20tracker/services/notification_services.dart';
-import 'package:personal_expense_tracker/modules/expense%20tracker/view/home.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
 final navigatorKey = GlobalKey<NavigatorState>();

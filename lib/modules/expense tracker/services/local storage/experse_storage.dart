@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:html';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -116,9 +115,9 @@ class StorageServices {
     _storageRepository.storeData("inputDataList", dataList);
   }
 
-  List<InputModel> retrieveInputDataFromStorage() {
+  Future<List<InputModel>> retrieveInputDataFromStorage() async{
     final List<Map<String, dynamic>> dataList =
-        _storageRepository.retrieveData("inputDataList");
+      await  _storageRepository.retrieveData("inputDataList") ?? [];
     return _dataSerializer.fromJsonList(dataList);
   }
 
